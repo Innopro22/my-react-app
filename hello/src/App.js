@@ -1,6 +1,8 @@
 import './index.css';
 import Employee from './componets/employees';
 import { useState } from 'react';
+import {v4 as uuid} from 'uuid'
+import AddEmployee from './componets/addEmployees'
 function App() {
   const [role, setRole] = useState('teacter');
   const [employees, setEmployees] = useState(
@@ -68,6 +70,16 @@ function App() {
     setEmployees(updateEmployees);
    }
 
+    function newEmployee (name, role, img) {
+      const newEmployee = {
+        id: uuid(),
+        name: name,
+        role: role,
+        img: img,
+       }
+       setEmployees([...employees, newEmployee])
+    }
+
   const showEmployees = true;
   return (
     <div className="App">
@@ -89,6 +101,7 @@ function App() {
              />)
           })}
           </div>
+          <AddEmployee newEmployee={newEmployee}/>
         </>
       )
     
