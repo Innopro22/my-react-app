@@ -3,6 +3,7 @@ import Employee from './componets/employees';
 import { useState } from 'react';
 import {v4 as uuid} from 'uuid'
 import AddEmployee from './componets/addEmployees'
+import EditEmployee from './componets/editEmployees';
 function App() {
   const [role, setRole] = useState('teacter');
   const [employees, setEmployees] = useState(
@@ -91,13 +92,21 @@ function App() {
         }} />
         <div className='flex flex-wrap justify-center'>
           {employees.map((employee)=>{
-            return (<Employee 
+            const editEmployee =  (
+               <EditEmployee 
+                    name={employee.name} 
+                    role={employee.role}
+                    id={employee.id}
+                    updateEmployee={updateEmployee}
+                                />);
+            return (
+            <Employee 
               key={employee.id}
               id={employee.id}
               name={employee.name}
               role={employee.role}
               img={employee.img}
-              updateEmployee={updateEmployee}
+              editEmployee={editEmployee}
              />)
           })}
           </div>
